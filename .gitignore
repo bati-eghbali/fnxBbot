@@ -1,0 +1,26 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# crawl artifacts (large / regenerable) and local run state
+backend/data/raw/
+backend/data/pdf/
+backend/data/*.log
+backend/data/embed_cache/
+backend/data/quota_state.json
+cid.tmp
+
+# node
+node_modules/
+frontend/dist/
+
+# editors / os
+.vscode/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+data/raw/
+data/pdf/
+data/embed_cache/
+data/*.log
+data/quota_state.json
+.env

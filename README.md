@@ -1,5 +1,8 @@
 # FNX AI Chatbot · הבוט החכם של הפניקס
 
+> 🌐 **הבוט באוויר:** https://fnx-bbot.vercel.app
+> (השרת: https://fnxbbot.onrender.com · השאלה הראשונה יכולה לקחת עד דקה, כי השרת החינמי "מתעורר")
+
 צ'אט בעברית שעונה על שאלות לקוחות **רק מתוך התוכן הציבורי של fnx.co.il**. כל תשובה מגיעה עם קישור לעמוד המקור. כשהמידע לא כתוב באתר, הבוט אומר זאת ומפנה לשירות הלקוחות, במקום להמציא.
 
 > האקתון AI קוד פתוח 2026 · אתגר בשיתוף הפניקס
@@ -196,6 +199,20 @@ cd ../frontend && npm install && npm run dev      # http://localhost:5173
 - `python -m app.cli "שאלה" "שאלת המשך"`: צ'אט בטרמינל, עם ה-trace של כל צעד.
 - `python -m ingest.probe`: איכות האחזור וכיול הסף.
 - `python -m eval.run_eval`: סט ההערכה המלא.
+
+## העלאה לענן
+
+| חלק | שירות | הגדרות |
+|---|---|---|
+| שרת (FastAPI + Agent + המאגר) | **Render**, מסלול Free, Docker | Root Directory: `backend`. משתני סביבה: `GEMINI_API_KEYS`, `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `CORS_ORIGINS`. Health Check: `/health` |
+| ממשק (React) | **Vercel**, מסלול Hobby | Root Directory: `frontend`. משתנה סביבה: `VITE_API_URL` (כתובת השרת ב-Render) |
+| היסטוריית שיחות | **Supabase**, מסלול Free | הטבלאות נוצרות עם `python apply_schema.py` |
+
+**איך המאגר מגיע לענן:** המאגר (`data/chroma` ו-`data/bm25.pkl`) נבנה מקומית ונשמר ב-git, ובבנייה נארז בתוך ה-image של השרת. הדיסק במסלול החינמי של Render נמחק בכל הפעלה מחדש, ולכן זו הדרך שבה המאגר נשאר זמין.
+
+**עדכונים:** כל `push` ל-`master` מעדכן את Render ואת Vercel אוטומטית.
+
+**מדריך מלא בעברית, צעד אחר צעד:** [DEPLOY_HE.md](DEPLOY_HE.md).
 
 ## מבנה הפרויקט
 
